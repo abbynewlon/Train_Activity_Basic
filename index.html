@@ -12,7 +12,58 @@
 </head>
 
 <body>
+    <header>
+        <h1>Anytime is Train Time</h1>
+        <h1>Choo Choo. Chee Chee.</h1>
+    </header>
+    <section id="time-table">
+        <div class="container">
+            <div class="row">Current Train Schedule</div>
+            <div class="row" id="col-name">
+                <div class="col md-2">
+                    Train Name
+                </div>
+                <div class="col md-2">
+                    Destination
+                </div>
+                <div class="col md-2">
+                    Frequency (min)
+                </div>
+                <div class="col md-2">
+                    Next Arrival
+                </div>
+                <div class="col md-2">
+                    Minutes Away
+                </div>
+                <div class="col md-2">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="adding-form">
+        <form>
+            <div class="form-group">
+                <label for="trainName">Train Name</label>
+                <input type="search" class="form-control" id="trainNameInput">
+            </div>
+            <div class="form-group">
+                <label for="destinationName">Destination</label>
+                <input type="search" class="form-control" id="destinationNameInput" >
+            </div>
+            <div class="form-group">
+                <label for="firstTrain">First Train Time (HH:mm-military time)</label>
+                <input type="search" class="form-control" id="firstTrainInput" >
+            </div>
+            <div class="form-group">
+                <label for="freguencyNumber">Frequency (min)</label>
+                <input type="search" class="form-control" id="frequencyInput" >
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </section>
  </body>
 
 </html>
