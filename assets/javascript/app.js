@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   // Initialize Firebase
   var config = {
@@ -13,11 +14,11 @@ $(document).ready(function () {
   var database = firebase.database();
 
   //initailize varibles. should somehow be in an object or something
-  var trainName;
-  var destination;
-  var frequency;
-  var nextArrival;
-  var minutesAway;
+  var trainName = "";
+  var destination = "";
+  var frequency = "";
+  var nextArrival = "";
+  var minutesAway = "";
 
 
   //testing moment.js
@@ -30,14 +31,49 @@ $(document).ready(function () {
 
   $("#new-train-info").on("click", function(event) {
     event.preventDefault();
-  
-    var valueTrainName = $("#trainNameInput").val().trim();
-    var valueDestinationName = $("#destinationNameInput").val().trim();
+    
+    var trainName = $("#trainNameInput").val().trim();
+    console.log(trainName);
+    var destination = $("#destinationNameInput").val().trim();
     //need to change whole moment thing here
-    var valueFirstTrain = moment($("#firstTrainInput").val().trim(), "MM/DD/YYYY").format("X");
-    var valueFrequency = $("#frequencyInput").val().trim();
-    alert("into the click");
-  });
+    var frequency = $("#frequencyInput").val().trim();
+    //do math for these next 2
+    var nextArrival = "";
+    var minutesAway = "";
+    
+    var specificTrain = {
+      tname: trainName,
+      dest: destination,
+      freq: frequency,
+      arriv: nextArrival,
+      away: minutesAway
+    }
+    //so that can send to method to print onto page
+    addToHTML(specificTrain);
+    //create object to store specific train info and store that object in firebase
+ 
+    //not sure what below is doing. complete the firebase portion later
+    //maybe have a counter for the different names 
+    //database.ref().push(specificTrain);
 
+
+    //clear the data from the fields
+    $("#form")[0].reset();
   
+});
+
+  function addToHTML(valueOfNewTrainVar) {
+    var newTrainData= $("<tr>").append(
+      $("<td>").text(valueOfNewTrainVar.tname),
+      $("<td>").text(valueOfNewTrainVar.dest),
+      $("<td>").text(valueOfNewTrainVar.freq),
+      $("<td>").text(valueOfNewTrainVar.arriv),
+      $("<td>").text(valueOfNewTrainVar.away),
+      
+    );
+
+    //append time-table
+      $("table").append(newTrainData);
+      console.log(valueOfNewTrainVar.destination);
+  }
 });

@@ -21,32 +21,28 @@
     </header>
     <section id="time-table">
         <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Train Name</td>
+                        <td>Destination</td>
+                        <td>Frequency (min)</td>
+                        <td>Next Arrival</td>
+                        <td>Minutes Away</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <div class="row">Current Train Schedule</div>
-            <div class="row" id="col-name">
-                <div class="col md-2">
-                    Train Name
-                </div>
-                <div class="col md-2">
-                    Destination
-                </div>
-                <div class="col md-2">
-                    Frequency (min)
-                </div>
-                <div class="col md-2">
-                    Next Arrival
-                </div>
-                <div class="col md-2">
-                    Minutes Away
-                </div>
-                <div class="col md-2">
-                    
-                </div>
-            </div>
+            <!--this is where dynamically added-->
+            <tr></tr>
+            
         </div>
     </section>
 
     <section id="adding-form">
-        <form>
+        <form id="form">
             <div class="form-group">
                 <label for="trainName">Train Name</label>
                 <input type="search" class="form-control" id="trainNameInput">
