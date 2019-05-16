@@ -33,13 +33,33 @@ $(document).ready(function () {
     event.preventDefault();
     
     var trainName = $("#trainNameInput").val().trim();
-    console.log(trainName);
     var destination = $("#destinationNameInput").val().trim();
-    //need to change whole moment thing here
     var frequency = $("#frequencyInput").val().trim();
-    //do math for these next 2
     var nextArrival = "";
     var minutesAway = "";
+
+    //not printed on html just to do math.
+    var firstOne = $("#firstTrainInput").val().trim();
+    var t = moment(firstOne, "hh:mm");
+    var currentTime = moment();
+    var differenceBetween = t.diff(currentTime, "minutes");
+    console.log(t.format("hh:mm"));
+    console.log(firstOne);
+    if(differenceBetween < 0){
+      //nextArrival = currentTime.add(moment.duration(differenceBetween, 'minutes')).format("hh:mm");
+      console.log("differenceBetween"+ differenceBetween);
+      //nextArrival = currentTime.add(differenceBetween, "minutes").format("hh:mm");
+      nextArrival = differenceBetween%frequency;
+      console.log("nextArrival" + nextArrival);
+      //nextArrival = currentTime + differenceBetween; Need to format correctly
+    }else{
+      nextArrival = firstOne;
+    }
+  
+    
+    //(currentTime - firstOne)%frequency
+    //(firstOne)).toNow()
+   
     
     var specificTrain = {
       tname: trainName,
@@ -49,31 +69,32 @@ $(document).ready(function () {
       away: minutesAway
     }
     //so that can send to method to print onto page
-    addToHTML(specificTrain);
     //create object to store specific train info and store that object in firebase
- 
-    //not sure what below is doing. complete the firebase portion later
-    //maybe have a counter for the different names 
-    //database.ref().push(specificTrain);
 
+    database.ref().push(specificTrain);
 
     //clear the data from the fields
     $("#form")[0].reset();
   
 });
 
-  function addToHTML(valueOfNewTrainVar) {
+  
+    
+  
+
+  database.ref().on("child_added", function(snapshotTrain) {
     var newTrainData= $("<tr>").append(
-      $("<td>").text(valueOfNewTrainVar.tname),
-      $("<td>").text(valueOfNewTrainVar.dest),
-      $("<td>").text(valueOfNewTrainVar.freq),
-      $("<td>").text(valueOfNewTrainVar.arriv),
-      $("<td>").text(valueOfNewTrainVar.away),
+      $("<td>").text(snapshotTrain.val().tname),
+      $("<td>").text(snapshotTrain.val().dest),
+      $("<td>").text(snapshotTrain.val().freq),
+      $("<td>").text(snapshotTrain.val().arriv),
+      $("<td>").text(snapshotTrain.val().away),
       
     );
-
     //append time-table
       $("table").append(newTrainData);
-      console.log(valueOfNewTrainVar.destination);
-  }
+    
+
+
+  });
 });
